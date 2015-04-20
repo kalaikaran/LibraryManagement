@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html data-ng-app="LibraryApp">
+<head>
+    <title>Library Manager</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-responsive.min.css" rel="stylesheet" />
+    <link href="Content/customerManagementStyles.css" rel="stylesheet" />
+    <link href="Content/custom-style.css" rel="stylesheet" />
+</head>
+<body ng-controller='menuController'> 
+
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand " href="#/">
+                    <img src="Content/Images/people.png" alt="logo"> Library Manager
+                </a>
+                
+        	<div>
+                
+                <ul class="nav nav-pills" >
+                    <li ><a href="#/addBooks">Add Books</a></li>
+                    <li ><a href="#/addMember">Add Member</a></li>
+                    <li ><a href="#/search">Search</a></li>
+                    <li ><a ng-bind="loginemail"></a></li>
+                    <li ng-if="invalidUser==false"  ng-click="logout()"><a>Logout</a></li>
+                </ul>
+             </div> 
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <!-- Note that AngularJS 1.2+ now has a built-in ng-animation direction. Left in animated-view to show a 
+         custom directive -->
+<!--    <div animated-view></div>-->
+    <div ng-view></div>
+
+
+    <div id="footer">
+        <div class="navbar navbar-fixed-bottom">
+            <div class="navbar-inner">
+                <div class="container">
+                    <footer>
+                        <div class="row">
+                            <div class="span4">
+                                Created by CTS
+                            </div>
+                            <div class="span4">
+                                Twitter: <a href="">@CTS</a>
+                            </div>
+                            <div class="span4">
+                                Blog: <a href=""></a>
+                            </div>
+                        </div>
+                   </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-route.js"></script>
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/ui-grid.js"></script>
+    
+    <!-- UI Libs -->
+    <script src="Scripts/bootstrap.js"></script>
+
+
+    <!-- App libs -->
+    <script src="app/app.js"></script>
+     <script src="app/controllers/controllers.js"></script>
+    <script src="app/controllers/signupController.js"></script>
+    <script src="app/services/booksService.js"></script>
+    <script src="app/directives/animatedView.js"></script>
+    <script src="app/controllers/LoginController.js"></script>
+    <script src="app/controllers/AddNewBookController.js"></script>
+    <script src="app/controllers/searchController.js"></script>
+    <script src="app/services/loginService.js"></script>
+    <script src="app/controllers/menuController.js"></script>
+</body>
+</html>

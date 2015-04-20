@@ -1,0 +1,33 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Login</h3>
+    </div>
+    <div class="panel-body">
+        <form name="signupLogin" ng-submit="submit()">
+            <div class="form-group">
+                <label for="emailId">Email Id</label>
+                <input type="email" name="emailId" ng-model="emailId" placeholder="Enter your mail Id" required>
+                <span class="alert alert-danger" ng-show="signupLogin.emailId.$dirty && signupLogin.emailId.$invalid">Please enter a valid email Id</span>
+                <label for="UserPassword">Password</label>
+                <input type="password" name="userPassword" ng-model="UserPassword" placeholder="Enter the password"
+                       required>
+
+                <span class="alert alert-danger" ng-show="signupLogin.UserPassword.$error.required"> Password cannot be blank</span>
+                
+                 <label for="ConfirmPassword">Confirm Password</label>
+                <input type="password" name="RepeatPassword" ng-model="RepeatPassword" placeholder="Confirm the password" 
+                       required>
+
+                <span class="alert alert-danger" ng-show="UserPassword!= RepeatPassword"> password and confirm password need to be same </span>
+                </br>
+                </br>
+                <button type="submit" class="btn btn-primary">OK</button>
+                <button type="reset" class="btn btn-danger">Cancel</button>
+                
+              
+                </br>
+                
+            </div>
+        </form>
+    </div>
+</div>

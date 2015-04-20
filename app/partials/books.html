@@ -1,0 +1,94 @@
+<div  >
+    <div class="container">
+        <div class="searchcontent">
+            <div class="form-group">
+              <input type="text" ng-model="search.name" class="form-control" placeholder="Search">
+              
+            </div>
+           
+        </div>
+<header>
+    <h3>All Books</h3>
+</header>
+        <div>
+        <table class='table table-bordered table-striped'>
+                   
+     <tr>
+        <th >Name</th>
+        <th >Author</th>
+        <th >Lang</th>
+        <th >Year</th>      
+    </tr>         
+      <tr ng-repeat="book in books" ng-show="editingData[book.id]">
+                            
+                           
+                             <td >                                
+                                <div ><input type="text" ng-model="book.name" /></div>
+                            </td>
+                            
+                         
+                             <td  >
+                                
+                                <div ><input type="text" ng-model="book.author" /></div>
+                            </td>
+                            
+                          
+                             <td>
+                                
+                                <div ><input type="text" ng-model="book.language" /></div>
+                            </td>
+                            
+                            
+                            <td >
+                                
+                                <div ><input type="text" ng-model="book.publishedOn" /></div>
+                            </td>
+                           
+                            <td>
+                               
+                                <button class="btn btn-primary" ng-click="update(book)">Update</button>
+                                <button class="btn btn-primary" ng-click="reset(book)">Reset</button>
+                                
+                                
+                                <button  
+                                        class="btn btn-danger" 
+                                           ng-click="ConfirmDelete($index)" 
+                                          >Delete</button>
+                                
+
+                            </td>
+                        </tr>
+                   
+                   
+                        <tr ng-repeat="book in books" ng-hide="editingData[book.id]">                            
+                            <td >
+                                <div >{{book.name| uppercase}}</div>                                
+                            </td>  
+                            
+                            <td >
+                                <div >{{book.author}}</div>
+                                
+                            </td>  
+                            
+                            <td >
+                                <div >{{book.language}}</div>
+                                
+                            </td> 
+                            
+                            <td >
+                                <div>{{book.publishedOn}}</div>
+                               
+                            </td>
+                                                   
+                            <td>
+                                 <button class="btn btn-primary" ng-click="modify(book)">Modify</button>
+                                                                                     
+                            </td>
+                        </tr>
+     
+                       
+                </table>
+    </div>
+
+</div>
+</div>
