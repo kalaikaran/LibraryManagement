@@ -1,6 +1,6 @@
 <div >
     <div class="container">
-        <!--<div class="searchcontent">
+    <!--<div class="searchcontent">
             <div class="form-group">
               <input type="text" ng-model="search[selectoption.type]" class="form-control" placeholder="Search">
               <select ng-model="selectoption.type" ng-options="options.value as options.name for options in selectOptions" ng-change="changedValue()"></select>
@@ -13,12 +13,10 @@
 
     <table class='table table-bordered table-striped'>
     <tr>
-      
-         <th >Name</th>
+        <th >Name</th>
         <th >Author</th>
         <th >Lang</th>
         <th >Year</th>
-     
     </tr>
     <tr ng-repeat="book in books |filter: search">
                               
@@ -45,7 +43,12 @@
 
     </div>-->
     
-    <div ui-grid="gridOptions" ui-grid-edit class="grid" external-scopes="myExternalScope"></div>
+    <div>
+        <input type="text" class="form-control" ng-change="refreshData()" placeholder="Product Name" ng-model="searchText">
+        <br>
+        <div id="grid1" ui-grid="gridOpts" class="grid"></div>
+    </div>
+
 
 </div>
 </div>

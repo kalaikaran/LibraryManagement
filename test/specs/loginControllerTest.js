@@ -1,5 +1,5 @@
 describe('LoginContorller', function() {
-  beforeEach(angular.module('LibraryApp'));
+  beforeEach(module('LibraryApp'));
 
   var $controller;
 

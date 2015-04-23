@@ -1,39 +1,41 @@
-app.service("loginService", function($http){
+app.service("loginService", function($http,$rootScope,$location){
 
-    /* this.getUsers= function(){
-
-        return userCollection ;
-    };*/
-    
-    
-     this.getUsers = function () {
-        var userPromise = $http.get("https://lib-kalaikaran-3.c9.io/api/users");
-        userPromise.then(function (response){
-            console.log("ddddd");
-            return response.data;
-        })
-       
+  this.getUsers = function (byEmailid,userPassword) {
+        var url='https://lib-kalaikaran-3.c9.io/api/users/'+ byEmailid ;
+        return $http.get(url)
+        .then(function(data) {
+           // return data;
+          var loginUser=data.data;
+          console.log(loginUser.length);
+          if(loginUser.length>0){
+           if ((loginUser[0].pwd==userPassword)&&(loginUser[0].emailid=byEmailid)){
+                $rootScope.loginemail=byEmailid;
+                $rootScope.invalidUser=false;
+                $rootScope.invalidUserError=false;
+                $location.path('/books');
+                return true;
+            } 
+          }
+            
+               $rootScope.invalidUserError=true;    
+               return false;
+            
+         });
+        
     };
     
      this.addUsers = function (newEmaild,newPwd) {
-          var data = $.param({
-            json: JSON.stringify({
-                email: newEmaild,
+        
+          var data = JSON.stringify({
+                emailid: newEmaild,
                 pwd:newPwd
-            })
-        });
-        var userPromise = $http.post("https://lib-kalaikaran-3.c9.io/api/users", data);
+            }); 
+        console.log(data);
+        var userPromise = $http.post("/api/users", data);
         userPromise.then(function (response){
-            console.log("ddddd");
+            console.log(response.data);
             return response.data;
         })
        
     };
-    
-    
-
-    var userCollection=[ {
-        emailid:"a@a.com", pwd: "angular"},
-        {emailid: "b@b.com", pwd: "angular"
-    }]
-})
+});

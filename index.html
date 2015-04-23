@@ -6,6 +6,7 @@
     <link href="Content/bootstrap-responsive.min.css" rel="stylesheet" />
     <link href="Content/customerManagementStyles.css" rel="stylesheet" />
     <link href="Content/custom-style.css" rel="stylesheet" />
+    <link href="Content/ui-grid.css" rel="stylesheet" />
 </head>
 <body ng-controller='menuController'> 
 
@@ -19,9 +20,9 @@
         	<div>
                 
                 <ul class="nav nav-pills" >
-                    <li ><a href="#/addBooks">Add Books</a></li>
-                    <li ><a href="#/addMember">Add Member</a></li>
-                    <li ><a href="#/search">Search</a></li>
+                    <li ng-if="invalidUser==false" ><a href="#/addBooks">Add Books</a></li>
+                    <li ng-if="invalidUser==false"><a href="#/addMember">Add Member</a></li>
+                    <li ng-if="invalidUser==false"><a href="#/search">Search</a></li>
                     <li ><a ng-bind="loginemail"></a></li>
                     <li ng-if="invalidUser==false"  ng-click="logout()"><a>Logout</a></li>
                 </ul>

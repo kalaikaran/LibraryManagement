@@ -1,4 +1,4 @@
-app.controller('searchController', function ($scope, booksService, $http) {
+app.controller('searchController', function ($scope, booksService, $http,  $filter) {
     $scope.selectOptions = [
         { name: 'Name', value: 'name' }, 
         { name: 'Author', value: 'author' }, 
@@ -16,40 +16,26 @@ app.controller('searchController', function ($scope, booksService, $http) {
         $scope.search = null;
     }
     
-    var grid;
-  $scope.myExternalScope=$scope;
-  
-  $scope.genderTypes = [{ID: 1, type: 'female' },
-  {ID: 2, type: 'female' },
-  {ID: 3, type: 'both' },
-  {ID: 4, type: 'none' },
-  ];
-  
-  
-  $scope.gridOptions = {
-    enableSorting: true,
-    enableFiltering: true,
-    enableCellEditOnFocus: true,
-    columnDefs: [
-      { field: 'name',
-        sort: {
-          direction: 'desc',
-          priority: 1
-        }
-      },
-      { field: 'gender', editType: 'dropdown', enableCellEdit: true,
-          editableCellTemplate: 'temp.html' },
-      { field: 'company', enableSorting: false }
-    ],
-    onRegisterApi: function( gridApi ) {
-      grid = gridApi.grid;
-    }
-  };
+    var myDummyData2 = booksService.getHardBooks();
 
-  $http.get('https://rawgit.com/angular-ui/ui-grid.info/gh-pages/data/100.json')
-    .success(function(data) {
-      $scope.gridOptions.data = data;
-    });
+    $scope.filterOptions = {filterText: ''};
     
+    $scope.gridOpts = {
+        data: myDummyData2,
+        enableFiltering: true,
+        columnDefs: [
+                    {name: 'Name', field: 'name', enableFiltering: true, filter: {
+                            term: $scope.filterOptions.filterText //DOES NOT WORK... BUT WHY
+                        }
+                    },
+                    {name: 'Author', field: 'author'},
+                    {name: 'Language', field: 'language'},
+                    {name: 'Year', field: 'publishedOn'}
+                ]
+    };
+    
+    $scope.refreshData = function() {
+        $scope.gridOpts.data = $filter('filter')(myDummyData2, $scope.searchText, undefined);
+    };
     
 });

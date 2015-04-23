@@ -6,7 +6,18 @@ app.controller('booksController', function ($scope, $http, booksService,$rootSco
 
     function init() {
         
-        $scope.books = booksService.getBooks();//getHardBooks
+        /* Search Functionality*/
+        $scope.selectOptions = [
+            { name: 'Name', value: 'name' }, 
+            { name: 'Author', value: 'author' }, 
+            { name: 'Language', value: 'language' },
+            { name: 'Year', value: 'publishedOn' }
+        ];
+        $scope.selectoption = {type : $scope.selectOptions[0].value};
+        /* Search Functionality*/
+        
+        $scope.books = booksService.getHardBooks();//getHardBooks
+        
     }
 
    
@@ -16,6 +27,14 @@ app.controller('booksController', function ($scope, $http, booksService,$rootSco
       $scope.editingData[$scope.books[i].id] = false;
     }
 
+ $scope.ConfirmDelete=function(index){
+            //alert("Are you sure want to delete?");
+            if(window.confirm("Are you sure want to delete?"))
+               {
+               $scope.books.splice(index,1);
+               }
+        
+        }
 
     $scope.modify = function(book){
         $scope.editingData[book.id] = true;

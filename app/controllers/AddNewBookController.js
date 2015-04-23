@@ -1,6 +1,14 @@
 app.controller('AddNewBookController', function($scope, $location, booksService) {
 
-    $scope.books = booksService.getHardBooks();
+	$scope.books = [];
+
+    var promise = booksService.getBooks();
+    promise.then(function(data) {
+       
+        $scope.books = data.data;
+    });
+
+    console.log($scope.books);
     // this function invoke while change the text of name and author
     $scope.changedValue = function() {
             $scope.error = false;
@@ -23,14 +31,11 @@ app.controller('AddNewBookController', function($scope, $location, booksService)
         // this condition invoke while the book information is not entered  
         if (!oldBookName) {
 
-            $scope.books.push({
-                'name': $scope.name,
-                'author': $scope.author,
-                'language': $scope.language,
-                'publishedOn': $scope.publishedOn
-            });
 
-            $location.path('search');
+            booksService.addBooks($scope.name, $scope.author, $scope.language, $scope.publishedOn);
+
+
+            $location.path('books');
 
         }
     }

@@ -22,12 +22,24 @@ app.get("/api/Books",function(req, res){
     
 });
 app.post("/api/Books",function(req, res){
-    var bookAPIObj = new BookAPI();
-    var booksData = {id: 2, name: 'The Little Prince',     author: 'Antoine', language: 'French', publishedOn: '1943'};
-    bookAPIObj.saveBook(booksData, function (data){
+    var bookAPIObj = new BookAPI
+    var str = ""
+    req.on("data",function(chunck){
+        str+= chunck;
+    });
+    req.on("end",function(){
+        var convertedData = decodeURIComponent(str);
+        try{
+           var booksData = JSON.parse(convertedData); 
+        }catch(err){
+            console.log("catch")
+            res.end("JOSN Data is not proper");
+            return;
+        }
+        bookAPIObj.saveBook(booksData, function (data){
         res.end(JSON.stringify(data));
-    })
-    
+        });
+    });
 });
 
 app.get("/api/users/:emailId",function(req, res){
@@ -46,11 +58,23 @@ app.get("/api/users",function(req, res){
 });
 app.post("/api/users",function(req, res){
     var userAPIObj = new UserAPI();
-    var userData = {emailid:"a@a.com", pwd: "angular"};
-    userAPIObj.saveUser(userData, function (data){
+    var str = ""
+    req.on("data",function(chunck){
+        str+= chunck;
+    });
+    req.on("end",function(){
+        var convertedData = decodeURIComponent(str);
+        try{
+           var userData = JSON.parse(convertedData); 
+        }catch(err){
+            console.log("catch")
+            res.end("JOSN Data is not proper");
+            return;
+        }
+        userAPIObj.saveUser(userData, function (data){
         res.end(JSON.stringify(data));
-    })
-    
+        })
+    });
 });
 
 app.listen(process.env.PORT)

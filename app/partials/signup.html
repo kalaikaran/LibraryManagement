@@ -9,20 +9,23 @@
                 <input type="email" name="emailId" ng-model="emailId" placeholder="Enter your mail Id" required>
                 <span class="alert alert-danger" ng-show="signupLogin.emailId.$dirty && signupLogin.emailId.$invalid">Please enter a valid email Id</span>
                 <label for="UserPassword">Password</label>
-                <input type="password" name="userPassword" ng-model="UserPassword" placeholder="Enter the password"
+                <input type="password" name="UserPassword" ng-model="UserPassword" placeholder="Enter the password" ng-pattern="/^[a-zA-Z]*$/" ng-maxlength=12 ng-minlength=4  
                        required>
 
-                <span class="alert alert-danger" ng-show="signupLogin.UserPassword.$error.required"> Password cannot be blank</span>
-                
-                 <label for="ConfirmPassword">Confirm Password</label>
+              
+                <span  class="alert alert-danger" ng-show="signupLogin.UserPassword.$error.pattern"> password can have only alphabets</span>
+                <span class="alert alert-danger" ng-show="signupLogin.UserPassword.$error.maxlength">  Must be less than 12 characters  </span>
+                <span class="alert alert-danger" ng-show="signupLogin.UserPassword.$error.minlength">  Must be more than 4 characters  </span>
+                 
+                <label for="ConfirmPassword">Confirm Password</label>
                 <input type="password" name="RepeatPassword" ng-model="RepeatPassword" placeholder="Confirm the password" 
                        required>
 
-                <span class="alert alert-danger" ng-show="UserPassword!= RepeatPassword"> password and confirm password need to be same </span>
+                <span class="alert alert-danger" ng-show="UserPassword != RepeatPassword"> password and confirm password need to be same </span>
                 </br>
                 </br>
                 <button type="submit" class="btn btn-primary">OK</button>
-                <button type="reset" class="btn btn-danger">Cancel</button>
+                <button type="button" class="btn btn-danger" ng-click="goBack()">Cancel</button>
                 
               
                 </br>
